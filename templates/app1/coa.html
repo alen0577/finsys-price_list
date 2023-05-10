@@ -1,0 +1,135 @@
+{% extends 'app1/base.html' %}
+{% block body %}
+    {% load static %}
+    {% if user.is_authenticated %}
+        <div class="page-content">
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="card-title">
+                        <center><h2 class="mb-0">CHART OF ACCOUNTS</h2></center>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="form-control mb-3 w-100" type="text" id="namefilt" onkeyup="namefilter()" placeholder="Filter by name">
+                        </div>
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2"></div>
+                        <div class="btn-group col-md-3 w-75">
+                            <a role="button" class="btn btn-outline-info h-75" style="color: #fff;" href="{% url 'balancesheet' %}">Run Report</a>
+                            <a  href="{% url 'create_new'%}" style="color: #fff;" class="btn btn-outline-info h-75" >New</a>
+                            <button type="button"
+                                    class="btn btn-outline-info h-75 dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Import</a>
+                            </div>
+                            
+                            
+                        </div>
+                        <table class="table table-responsive-md table-responsive-sm table-responsive-lg table-hover"
+                               style="overflow: scroll;" id="tabletobe">
+                            <thead>
+                            <tr>
+                                <th scope="col">NAME</th>
+                                <th scope="col">TYPE</th>
+                               
+                                <th scope="col">TAX RATE</th>
+                                <!-- <th scope="col">FINSYS BALANCE</th> -->
+                                <th scope="col">BANK BALANCE</th>
+                                <th scope="col">ACTION</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for acoun in account1s %}
+                                {% if acoun.cid_id == cmp1.cid %}
+                                    <tr>
+                                        <td>{{ acoun.name }}</td>
+                                        <td>{{ acoun.acctype }}</td>
+                                        
+                                        <td>{{ acoun.deftaxcode }}</td>
+                                        <!-- <td>{{ acoun.balance }}</td> -->
+                                        <td></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button"
+                                                        class="btn btn-outline-info text-light dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    Account History
+                                                </button>
+                                                <div class="dropdown-menu bg-white">
+                                                    <a class="dropdown-item"
+                                                       href="gocoa/coa1edit/{{ acoun.accounts1id }}"
+                                                       style="height: 40px; font-size: 15px; color: black;"><b>Edit</b></a>
+                                                    <a class="dropdown-item"
+                                                       href="#"
+                                                       style="height: 40px; font-size: 15px; color: black;"><b>Make
+                                                        Inactive</b></a>
+                                                    <a class="dropdown-item" href="runreport/{{ acoun.accounts1id }}"
+                                                       style="height: 40px; font-size: 15px; color: black;"><b>Run
+                                                        Report</b></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                {% endif %}
+                            {% endfor %}
+                           
+                            </tbody>
+                        </table>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            var $checkBox = $('#issub'), $select = $('#gst');
+            $(document).ready(function () {
+                $checkBox.on('change', function (e) {
+                    if ($(this).is(':checked')) {
+                        $select.removeAttr('disabled');
+                    } else {
+                        $select.attr('disabled', 'disabled');
+                    }
+                });
+            });
+
+            function nameinput(element) {
+                if (element.value) {
+                    document.getElementById('name').value = element.value;
+                } else {
+                    document.getElementById('name').value = '';
+                }
+            }
+        </script>
+        <script>
+            function namefilter() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("namefilt");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("tabletobe");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fin sYs</title>
+    <link rel="icon" href="static/assets/images/favicon-32x32.png" type="image/png"/>
+    
+</head>
+<style>
+    p{
+        font-size: 14px;
+    }
+    .content-head span{
+        font-size: 13px;
+    }
+   
+    .content-head .p1{
+        font-size: 1.67em;
+        padding-top: .70em;
+       
+       
+    }
+    
+   img
+    {
+        width:40px;
+    }
+    
+    .content-head
+    {
+       
+        line-height: 1.6em;
+        background-color: rgb(70, 68, 68);
+        color: #fff;
+    }
+    
+    .invoice-content
+    {
+       font-size: 1em;
+    }
+    .table1
+    {
+       
+        font-size: 1.2em;
+        text-align: left;
+       
+    }
+    .table1 tr{
+        padding: 4px;
+    }
+    .table1 tr td{
+        padding: 2px;
+        margin-top: 5px;
+        margin-left: 4px;
+    }
+    
+    .table2
+    {
+        text-align: center;
+        padding-top: 6px;
+        font-size: 1.1em;
+        background-color:azure
+       
+    }
+    
+    .table-head
+    {
+        color: rgb(52, 49, 58);
+        
+       
+    }
+    .table2 .tbody tr 
+    {
+       margin-bottom: 3px;
+    }
+    .details
+    {
+       font-size: 1.1em;
+       text-align: start;
+    }
+  
+    .details span
+    {
+        margin-top: 1.2em;
+    }
+</style>
+
+<body>
+      
+        <div class="content-head" style=" padding:0.70em;">
+           
+            <p>
+                <div style=" text-align: left;">
+                    <img src="static/default.png">
+                </div>
+                <div style=" text-align: right;">
+                    <span class="p1" >TAX INVOICE</span><br>
+                </div>
+                
+                
+            <span style="text-transform: uppercase; text-align:center">{{cmp1.cname}}</span>
+            {{cmp1.caddress }}<br>
+            Email Id :  {{cmp1.cemail}},<br>
+            GSTIN/UIN : {{cmp1.gstno}}</p>
+   
+        </div>
+
+   
+  
+        <br><br>
+      
+        <table class="table3">
+            <tr>
+                <td>
+                    <div< class="details" >
+                        <h6>Bill To</h6>
+                        <p><span>Buyer / Client Name : {{invoice.customername}}</span><br>
+                            <span>{{invoice.bname}}</span><br>
+                            <span> GSTIN / UIN : {{cmp1.gstno}}</span> <br>
+                            <span>State : {{invoice.placosupply}}</span><br>
+                            <span>Place of Supply : {{invoice.placosupply}}</span>
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <table class="table1" border="1" >
+                        <tr>
+                        <td id="number">Invoice No : {{invoice.invoiceno}}</td>
+                        <td>Dated : {{invoice.invoicedate }}</td>
+                        </tr>
+                        <tr>
+                        <td>Delivery Note : {{invoice.note}} </td>
+                        <td>Mode / Terms of payment</td>
+                        </tr>
+                        <tr>
+                        <td>Reference No. & Date</td>
+                        <td>Other Refernces</td>
+                        </tr>
+                        <tr>
+                        <td>Buyers Order No. {{invoice.invoice_orderno}}</td>
+                        <td>Dated : </td>
+                        </tr>
+                        <tr>
+                        <td>Dispatch Doc No.</td>
+                        <td>Delivery Note Date</td>
+                        </tr>
+                        <tr>
+                        <td>Dispatch Through</td>
+                        <td>Destination</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Terms of Delivery</td>
+                        </tr>
+                        
+                        
+                    </table><br><br>
+
+              
+
+                </td>
+            </tr>
+        </table>
+            
+        
+    
+      
+       <br>
+       <hr>
+        <table class="table2">
+            <thead class="table-head" >
+                <tr>
+                  <th >Sl No.</th>
+                  <th >Description of Goods</th>
+                  <th >Batch Name</th>
+                  <th >Expiry Date</th>
+                  <th >HSN / SAC</th>
+                  
+                  <th>Qty</th>
+                  <th>Rate</th>
+                  <!-- <th>per</th> -->
+                   <th>GST Rate</th>
+                  <th>Disc %</th>
+                  <th>Amount</th>
+                </tr>
+            </thead>
+         
+            <tbody>
+
+                {% for j in invitem %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{j.product}}</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{j.hsn}}</td>
+                  <td>{{j.qty}}</td>
+                  <td>{{j.price}}</td>
+                  <!-- <td></td> -->
+                <td>{{j.tax}} %</td>
+                  
+                  <td></td>
+                  <td> {{j.total}}</td>
+                 
+                </tr>
+                {% endfor %}
+                <tr>
+                  <th colspan="9"   ><span>Sub Total</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.subtotal}}</td>
+                </tr>
+                {% if invoice.IGST %}
+                <tr>
+                  <th colspan="9"  ><span>IGST</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.IGST}}</td>
+                </tr>
+                {% endif %}
+                {% if invoice.CGST != '0.00' %}
+                <tr>
+                  <th colspan="9"  ><span >CGST</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.CGST}}</td>
+                </tr>
+                {% endif %}
+                {% if invoice.SGST %}
+                <tr>
+                  <th colspan="9"  ><span >SGST</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.SGST}}</td>
+                </tr>
+                {% endif %}
+                
+                {% if invoice.TCS != '0' %}
+                <tr style="display: none;">
+                  <th colspan="9"  ><span >TCS</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.TCS}}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <th colspan="9"  ><span>Grand Total</span></th>
+                  
+                  <td style="font-weight: bold;"> {{invoice.grandtotal}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+   
+        <br><br>
+     <hr> 
+     
+
+        <div class="amount">
+          <p>Amount in words:<br>
+          {{words_total}}</p>
+        </div>
+    {% if invoice.note %}
+    <div class="conditions">
+        <h4 style="font-size:13px ;">Note :{{invoice.note}}</h4>
+    </div>
+    {% endif %}
+
+          
+    
+    <table>
+        <td>
+            <div class="col-md-6">
+                <p class="gray-ish terms" style="font-size:13px ;"><b>BANK DETAILS</b><br>
+                  Bank Name :<br>
+                  A/c No :<br>
+                  Branch Name :<br>
+                  Bank IFSC :</p>
+                </div>
+        </td>
+        <td>
+            <div class="col-md-6">
+                <p class="gray-ish terms" style="text-align: right; font-size: 14px;"><b>COMPANY NAME</b><br><br><br> Authorised Signatory</p>
+                </div>
+
+        </td>
+    </table>                              
+
+    
+</body>
+
+</html>
