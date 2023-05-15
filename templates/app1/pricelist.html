@@ -57,41 +57,16 @@
                                style="height: 40px; font-size: 15px; color: white;">Active</a>
                             <a class="dropdown-item" href="{% url 'inactive' %}"
                                style="height: 40px; font-size: 15px; color: white;">Inactive</a>
-                            <a class="dropdown-item" href="{% url 'ipurchase' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Purchase</a>
-                            <a class="dropdown-item" href="{% url 'isales' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Sales</a>
-                            <a class="dropdown-item" href="{% url 'iservices' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Serives</a>
-                            <a class="dropdown-item" href="{% url 'igoods' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Goods</a>
+                            
                         </div>
                     </div> 
                   </div>
                  
-                  <div class="col">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-outline-info dropdown-toggle text-grey"
-                                data-toggle="dropdown">Sort by
-                        </button>
-                        <div class="dropdown-menu" style="background-color: black;">
-                            <a class="dropdown-item" href="{% url 'iordername' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Name</a>
-                            <a class="dropdown-item" href="{% url 'iod_rate' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Rate</a>
-                            <a class="dropdown-item" href="{% url 'iodhsn' %}"
-                               style="height: 40px; font-size: 15px; color: white;">HSN</a>
-                            <a class="dropdown-item" href="{% url 'iod_import' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Import item</a>
-                            <a class="dropdown-item" href="{% url 'iod_export' %}"
-                               style="height: 40px; font-size: 15px; color: white;">Export item</a>
-                        </div>
-                </div>
-            </div>
+                  
                 <div class="col">
                             <div class="dropdown">
-                                <a href="{% url 'add_item' %}">     <button type="button" class="btn btn-outline-info  text-grey"
-                                        >Add Item
+                                <a href="{% url 'new_price_list' %}">     <button type="button" class="btn btn-outline-info  text-grey"
+                                        >+ Price List
                                 </button></a>
                                
                             </div>
@@ -105,13 +80,12 @@
                     <thead>
                     <tr>
                         <th>NAME</th>
-                        <th>TYPE</th>
-                        <th>UNIT</th>
-                        <th>HSN</th>
-                        <th>PURCHASE COST</th>
-                        <th>SALES COST</th>
-                        <!-- <th>TAX</th> -->
-                        <th>STOCK</th>
+                        <th>DESCRIPTION</th>
+                        <th>CURRENCY</th>
+                        <th>DETAILS</th>
+                        <th>ROUNDING</th>
+                        <th>STATUS</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -124,7 +98,7 @@
                                 <td>{{ a.purchase_cost }}</td>
                                 <td>{{ a.sales_cost }}</td>
                                 <!-- <td>{{ a.tax_rate }}</td> -->
-                                <td>{{ a.stock }}
+                                <!-- <td>{{ a.stock }} -->
                                         
                                     <!--<div class="dropdown">
                                         <button type="button" class="btn btn-outline-info dropdown-toggle text-grey"

@@ -37485,3 +37485,7 @@ def pricelist(request):
 
     return render(request,'app1/pricelist.html',context)
 
+@login_required(login_url='regcomp')
+def new_price_list(request):
+    return render(request,'app1/pricelist_new.html')    
+
