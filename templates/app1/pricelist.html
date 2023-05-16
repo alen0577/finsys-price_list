@@ -43,10 +43,10 @@
                 
                             </div>
                         </div>
-                      </div>
-                  <div class="col">
+                    </div>
+                    <div class="col">
                     
-                    <div class="dropdown">
+                      <div class="dropdown">
                         <button type="button" class="btn btn-outline-info dropdown-toggle text-grey"
                                 data-toggle="dropdown">filter by
                         </button>
@@ -59,22 +59,22 @@
                                style="height: 40px; font-size: 15px; color: white;">Inactive</a>
                             
                         </div>
-                    </div> 
-                  </div>
+                      </div> 
+                    </div>
                  
                   
-                <div class="col">
+                    <div class="col">
                             <div class="dropdown">
                                 <a href="{% url 'new_price_list' %}">     <button type="button" class="btn btn-outline-info  text-grey"
                                         >+ Price List
                                 </button></a>
                                
                             </div>
-                </div>
+                    </div>
 
-                  </div>
                 </div>
-              </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-responsive-md table-hover mt-4" id="tabletobe">
                     <thead>
@@ -89,36 +89,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for a in items %}
-                <tr class='clickable-row' data-href="view_item/{{ a.id }}" >
-                                <td>{{ a.name }}</td>
-                                <td>{{ a.item_type }}</td>
-                                <td>{{ a.unit }}</td>
-                                <td>{{ a.hsn }}</td>
-                                <td>{{ a.purchase_cost }}</td>
-                                <td>{{ a.sales_cost }}</td>
-                                <!-- <td>{{ a.tax_rate }}</td> -->
-                                <!-- <td>{{ a.stock }} -->
-                                        
-                                    <!--<div class="dropdown">
-                                        <button type="button" class="btn btn-outline-info dropdown-toggle text-grey"
-                                                data-toggle="dropdown">Actions
-                                        </button>
-                                        <div class="dropdown-menu" style="background-color: white;">
-                                            <a href="itemedit_page/{{ a.id }}" class="dropdown-item"
-                                               style="color: black; font-size: 15px;">
-                                                <i class="bx bx-edit"><b>EDIT</b></i>
-                                            </a>
-                                            <a href="view_item/{{ a.id }}" class="dropdown-item"
-                                               style="color: black; font-size: 15px;">
-                                                <i class="bx bx-edit"><b>VIEW</b></i>
-                                            </a>
-                                            
-                                        </div>
-                                    </div>-->
-
-                                </td></a>
-                            </tr>
+                    {% for i in pricelist %}
+                    <tr class='clickable-row' data-href="view_item/{{ a.id }}" >
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.currency }}</td>
+                        <td>{{  }}</td>
+                        <td>{{  }}</td>
+                        <td>{{ }}</td>
+                               
+                                
+                    </tr>
                      
                     {% endfor %}
                   
@@ -131,6 +112,7 @@
         </div>
     </div>
 </div>
+
 <script>
     jQuery(document).ready(function($) {
         $(".clickable-row").click(function() {

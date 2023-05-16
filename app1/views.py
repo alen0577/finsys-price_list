@@ -37479,8 +37479,9 @@ def create_new(request):
 @login_required(login_url='regcomp')
 def pricelist(request):
     cmp1 = company.objects.get(id=request.session['uid'])
+    pricelist=Pricelist.objects.all()
     
-    context={'cmpl':cmp1}
+    context={'cmpl':cmp1,'pricelist':pricelist}
 
 
     return render(request,'app1/pricelist.html',context)

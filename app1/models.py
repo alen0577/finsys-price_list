@@ -1670,3 +1670,25 @@ class Otp_password(models.Model):
             # d = next_month - datetime.timedelta(days=next_month.day)
 
             # todate = str(d)
+
+
+# Models for price list
+
+class Pricelist(models.Model):
+    cid = models.ForeignKey(company, on_delete=models.CASCADE,null=True)
+    name=models.CharField(max_length=255,null=True,blank=True)
+
+    TYPE_CHOICES=(
+        ('S','Sales'),
+        ('P','Purchase'),
+    )
+    types=models.CharField(max_length=10,choices=TYPE_CHOICES,default='S')
+
+    ITEM_RATE_CHOICES=(
+        ('percentage','Markup or Markdown the item rates by a percentage'),
+        ('individual_rate','Enter the rate individually for each item'),
+    )
+    item_rate=models.CharField(max_length=100,choices=ITEM_RATE_CHOICES,default='percentage')
+
+    description=models.TextField(blank=True, null=True)
+    currency=models.CharField(max_length=255,default='Indian Rupee')
