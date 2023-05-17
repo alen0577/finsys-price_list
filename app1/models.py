@@ -1675,7 +1675,7 @@ class Otp_password(models.Model):
 # Models for price list
 
 class Pricelist(models.Model):
-    cid = models.ForeignKey(company, on_delete=models.CASCADE,null=True)
+    cid = models.ForeignKey(company, on_delete=models.CASCADE,null=True,blank=True)
     name=models.CharField(max_length=255,null=True,blank=True)
 
     TYPE_CHOICES=(
@@ -1692,3 +1692,14 @@ class Pricelist(models.Model):
 
     description=models.TextField(blank=True, null=True)
     currency=models.CharField(max_length=255,default='Indian Rupee')
+
+class Pricelist1_percentage(models.Model):
+    pricelist1=models.ForeignKey(Pricelist,on_delete=models.CASCADE,null=True,blank=True)
+    upordown=models.CharField(max_length=100,default='Markup')
+    percentage=models.CharField(max_length=100)
+    roundoffto=models.CharField(max_length=100,default='Never mind')
+
+class Pricelist2_individual(models.Model):
+    pricelist2=models.ForeignKey(Pricelist,on_delete=models.CASCADE,null=True,blank=True)
+    itemdetails=models.ForeignKey(itemtable,on_delete=models.CASCADE,null=True,blank=True)
+    customrate=models.IntegerField()
