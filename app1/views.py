@@ -37478,15 +37478,36 @@ def create_new(request):
 
 @login_required(login_url='regcomp')
 def pricelist(request):
-    cmp1 = company.objects.get(id=request.session['uid'])
-    # pricelist=Pricelist.objects.all()
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        
+        context = {'cmp1': cmp1}
+        return render(request,'app1/pricelist.html',context)
+            
+    except:
+        return redirect('pricelist')
     
-    context={'cmpl':cmp1,}
-
-
-    return render(request,'app1/pricelist.html',context)
 
 @login_required(login_url='regcomp')
 def new_price_list(request):
-    return render(request,'app1/pricelist_new.html')    
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        
+        context = {'cmp1': cmp1}
+        return render(request,'app1/pricelist_new.html',context) 
+            
+    except:
+        return redirect('pricelist')
+
+
+@login_required(login_url='regcomp')
+def pricelist_editpage(request):
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        
+        context = {'cmp1': cmp1}
+        return render(request,'app1/pricelist_editpage.html',context) 
+            
+    except:
+        return redirect('pricelist')       
 
