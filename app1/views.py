@@ -37511,3 +37511,15 @@ def pricelist_editpage(request):
     except:
         return redirect('pricelist')       
 
+@login_required(login_url='regcomp')
+def pricelist_viewpage(request):
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        
+        context = {'cmp1': cmp1}
+        return render(request,'app1/pricelist_viewpage.html',context) 
+            
+    except:
+        return redirect('pricelist')       
+        
+

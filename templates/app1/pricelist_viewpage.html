@@ -1,0 +1,256 @@
+{% extends 'app1/base.html' %}
+{% block body %}
+    {% load static %}
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card radius-15" style="background-color: #243e54;">
+                    <div class="card-body">
+                        <form action="" method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {% if user.is_authenticated %}
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card-title mt-2">
+                                        <h6 class="mb-0">All price lists</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-5">
+                                    <a href="{% url 'new_price_list' %}">     
+                                        <button type="button" class="btn btn-outline-info btn-sm text-grey">+ Price List</button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive-md table-hover mt-4" id="tabletobe">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <!-- <th>DESCRIPTION</th> -->
+                                                <!-- <th>CURRENCY</th> -->
+                                                <th>Details</th>
+                                                <!-- <th>ROUNDING</th> -->
+                                                <th>Status</th>
+                                                
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in pricelist %}
+                                            <tr class='clickable-row' data-href="view_item/{{ a.id }}" >
+                                                <td>{{ i.name }}</td>
+                                                <td>{{ i.description }}</td>
+                                                <td>{{ i.currency }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                       
+                                                        
+                                            </tr>
+                                             
+                                            {% endfor %}
+                                          
+                                          
+                                           
+                                          
+                                            </tbody>
+                                        </table>
+                                    </div>
+                               
+                                </div>
+                                
+                                
+                            </div>
+                                         
+                                
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+        
+
+            </div>
+
+            <div class="col-lg-8">
+
+                <div class="card radius-15" style="background-color: #243e54;">
+                    <div class="card-body">
+                        <form action="" method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {% if user.is_authenticated %}
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card-title mt-2">
+                                        <h6 class="mb-0">price list1</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1"></div>
+
+                                <div class="col-lg-7">
+
+                                    <a href="" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
+                                    {% if customer.status == act%}
+                                    <a href="" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactivate</a>
+                                    {% else %}
+                                    <a href="" class=" fa fa-check btn btn-outline-info text-grey mt-2 mb-3" role="button"> Activate</a>
+                                    {% endif %}
+                                    <a href="" class="fa fa-trash-o btn btn-outline-info text-grey mt-2 mb-3" role="button"> Delete</a>
+                                    <a href="{% url 'pricelist' %}" class="fa fa-arrow-left btn btn-outline-info text-grey mt-2 mb-3" role="button"> Close</a>
+                                   
+                                   
+                                     
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Name:</label>
+                                <div class="col-sm-5">
+                                  <p>price list1</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Type:</label>
+                                <div class="col-sm-5">
+                                  <p>Sales</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Item Rate:</label>
+                                <div class="col-sm-5">
+                                  <p>Markup or Markdown the item rates by a percentage</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Description:</label>
+                                <div class="col-sm-5">
+                                  <p>description of price list</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Percentage:</label>
+                                <div class="col-sm-5">
+                                  <p>28%</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Round off to:</label>
+                                <div class="col-sm-5">
+                                  <p>Never mind</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2">Currency:</label>
+                                <div class="col-sm-5">
+                                  <p>Indian Rupee</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-5">Customized item rates</label><br>
+                                <div class="table-responsive col-sm-10">
+                                    <table class="table  table-striped" style="background-color: #2f516f;color: white;">
+                                        <thead>
+                                            <tr>
+                                                <th>ITEM DETAILS</th>
+                                                <th>STANDARD RATE(INR)</th>
+                                                <th>CUSTOM RATE(INR)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+                            
+                                
+
+                            
+                                
+                            
+                                
+                        
+                                
+        
+                                                           
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+
+                
+            </div>
+
+        </div>
+       
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var radio1 = document.getElementById('item-rate-1');
+        var radio2 = document.getElementById('item-rate-2');
+        var fields1 = document.getElementById('fields-1');
+        var fields2 = document.getElementById('fields-2');
+        var fields3 = document.getElementById('fields-3');
+
+        radio1.addEventListener('click', function() {
+            fields1.style.display = 'block';
+            fields2.style.display = 'none';
+            fields3.style.display = 'none';
+        });
+
+        radio2.addEventListener('click', function() {
+            fields1.style.display = 'none';
+            fields2.style.display = 'block';
+            fields3.style.display = 'block';
+        });
+    </script>
+
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+{% endblock %}
