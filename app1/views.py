@@ -37492,8 +37492,9 @@ def pricelist(request):
 def new_price_list(request):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
+        items = itemtable.objects.all()
         
-        context = {'cmp1': cmp1}
+        context = {'cmp1': cmp1,'items':items}
         return render(request,'app1/pricelist_new.html',context) 
             
     except:
@@ -37522,4 +37523,45 @@ def pricelist_viewpage(request):
     except:
         return redirect('pricelist')       
         
+@login_required(login_url='regcomp')
+def create_pricelist(request):
+    if request.method == 'POST':
+        cmp1 = company.objects.get(id=request.session['uid'])
+        name=request.POST['name']
+        typedata=request.POST['type']
+        itemratedata=request.POST['item-rate']
+        print(itemratedata)
+        description=request.POST['description']
+        upordown=request.POST['select']
+        percentage=request.POST['cent']
+        roundoffto=request.POST['select2']
+        pricelist=Pricelist(cid=cmp1,name=name,types=typedata,item_rate=itemratedata,description=description,)
+        pricelist.save()
+        itemname=request.POST.getlist('itemname[]')
+        itemrate=request.POST.getlist('itemrate[]')
+        customrate=request.POST.getlist('customrate[]')
+        print(customrate)
+
+        if itemratedata == 'percentage':
+            pricelistsub1=pricelist1_percentage(upordown=upordown,percentage=percentage,roundoffto=roundoffto,pricelist1=pricelist)
+            pricelistsub1.save()
+            return redirect('pricelist')
+        else:
+            if len(itemname) == len(itemrate) == len(customrate):
+                mapped2 = zip(itemname,itemrate, customrate)
+                mapped = list(mapped2)
+                print(mapped)
+                for ele in mapped:
+                    created = pricelist2_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist2=pricelist)
+
+                print('finish') 
+                return redirect('pricelist')    
+
+
+
+
+
+
+
+
 
