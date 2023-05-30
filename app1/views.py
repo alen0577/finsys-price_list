@@ -37561,7 +37561,16 @@ def create_pricelist(request):
 
 
 
-
+@login_required(login_url='regcomp')
+def delete_pricelist(request,pk):
+    p1=pricelist1_percentage.objects.filter(pricelist1=pk)
+    p1.delete()
+    p2=pricelist2_individual.objects.filter(pricelist2=pk)
+    p2.delete()
+    pricelist=Pricelist.objects.get(id=pk)
+    pricelist.delete()
+    return redirect('pricelist')
+    
 
 
 

@@ -858,6 +858,7 @@ urlpatterns = [
     path('pricelist_editpage/',views.pricelist_editpage,name='pricelist_editpage'),
     path('pricelist_viewpage/',views.pricelist_viewpage,name='pricelist_viewpage'),
     path('create_pricelist/',views.create_pricelist,name='create_pricelist'),
+    path('delete_pricelist/<int:pk>',views.delete_pricelist,name='delete_pricelist'),
 
         
     
