@@ -35,7 +35,7 @@
                                                 <th>Name</th>
                                                 <!-- <th>DESCRIPTION</th> -->
                                                 <!-- <th>CURRENCY</th> -->
-                                                <th>Details</th>
+                                                <th>Type</th>
                                                 <!-- <th>ROUNDING</th> -->
                                                 <th>Status</th>
                                                 
@@ -45,9 +45,12 @@
                                             {% for i in pricelist %}
                                             <tr class='clickable-row' data-href="view_item/{{ a.id }}" >
                                                 <td>{{ i.name }}</td>
-                                                <td>{{ i.description }}</td>
-                                                <td>{{ i.currency }}</td>
-                                                <td></td>
+                                                <td>{{ i.types }}</td>
+                                                {% if i.is_active %}
+                                                <td>Active</td>
+                                                {% else %}
+                                                <td>Inactive</td>
+                                                {% endif %}
                                                 <td></td>
                                                 <td></td>
                                                        
@@ -97,9 +100,9 @@
 
                                     <a href="" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
                                     {% if customer.status == act%}
-                                    <a href="" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactivate</a>
+                                    <a href="" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactive</a>
                                     {% else %}
-                                    <a href="" class=" fa fa-check btn btn-outline-info text-grey mt-2 mb-3" role="button"> Activate</a>
+                                    <a href="" class=" fa fa-check btn btn-outline-info text-grey mt-2 mb-3" role="button"> Active</a>
                                     {% endif %}
                                     <a href="" class="fa fa-trash-o btn btn-outline-info text-grey mt-2 mb-3" role="button"> Delete</a>
                                     <a href="{% url 'pricelist' %}" class="fa fa-arrow-left btn btn-outline-info text-grey mt-2 mb-3" role="button"> Close</a>

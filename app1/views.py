@@ -37480,8 +37480,8 @@ def create_new(request):
 def pricelist(request):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
-        
-        context = {'cmp1': cmp1}
+        pricelist=Pricelist.objects.filter(cid=cmp1)
+        context = {'cmp1': cmp1, 'pricelist':pricelist}
         return render(request,'app1/pricelist.html',context)
             
     except:
@@ -37516,8 +37516,9 @@ def pricelist_editpage(request):
 def pricelist_viewpage(request):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
+        pricelist=Pricelist.objects.filter(cid=cmp1)
         
-        context = {'cmp1': cmp1}
+        context = {'cmp1': cmp1, 'pricelist':pricelist}
         return render(request,'app1/pricelist_viewpage.html',context) 
             
     except:

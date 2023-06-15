@@ -1679,10 +1679,10 @@ class Pricelist(models.Model):
     name=models.CharField(max_length=255,null=True,blank=True)
 
     TYPE_CHOICES=(
-        ('S','Sales'),
-        ('P','Purchase'),
+        ('Sales','Sales'),
+        ('Purchase','Purchase'),
     )
-    types=models.CharField(max_length=10,choices=TYPE_CHOICES,default='S')
+    types=models.CharField(max_length=10,choices=TYPE_CHOICES,default='Sales')
 
     ITEM_RATE_CHOICES=(
         ('percentage','Markup or Markdown the item rates by a percentage'),
