@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form action="" method="post" class="needs-validation" novalidate>
                             {% csrf_token %}
-                            
+                            {% if user.is_authenticated %}
 
                             <div class="row">
                                 <div class="col-lg-5">
@@ -72,7 +72,7 @@
                             </div>
                                          
                                 
-                           
+                            {% endif %}
                         </form>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="card-body">
                         <form action="" method="post" class="needs-validation" novalidate>
                             {% csrf_token %}
-                            
+                            {% if user.is_authenticated %}
                            
                             
                             <div class="row">
@@ -144,14 +144,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2">Percentage:</label>
                                 <div class="col-sm-5">
-                                  <p>{{pl.upordown}} - {{pl.percentage}}%</p>
+                                  <p>{{}}-{{}}</p>
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
                                 <label class="col-sm-2">Round off to:</label>
                                 <div class="col-sm-5">
-                                  <p>{{pl.roundoffto}}</p>
+                                  <p>{{}}</p>
                                 </div>
                             </div>
                             
@@ -197,7 +197,7 @@
                                 
         
                                                            
-                            
+                            {% endif %}
                             
                         </form>
                     </div>

@@ -1692,17 +1692,17 @@ class Pricelist(models.Model):
 
     description=models.TextField(blank=True, null=True)
     currency=models.CharField(max_length=255,default='Indian Rupee')
-    is_active=models.BooleanField(default=True,null=True,blank=True)
-    
-class pricelist1_percentage(models.Model):
-    pricelist1=models.ForeignKey(Pricelist,on_delete=models.CASCADE,null=True,blank=True)
     upordown=models.CharField(max_length=100,default='Markup')
     percentage=models.CharField(max_length=100,null=True,blank=True)
     roundoffto=models.CharField(max_length=100,default='Never mind')
+    is_active=models.BooleanField(default=True,null=True,blank=True)
     
 
-class pricelist2_individual(models.Model):
-    pricelist2=models.ForeignKey(Pricelist,on_delete=models.CASCADE,null=True,blank=True)
+
+    
+
+class pricelist_individual(models.Model):
+    pricelist1=models.ForeignKey(Pricelist,on_delete=models.CASCADE,null=True,blank=True)
     itemname=models.CharField(max_length=100,null=True,blank=True)
     itemrate=models.IntegerField(null=True,blank=True,default=0)
     customrate=models.CharField(max_length=100,null=True,blank=True,default=0)

@@ -90,8 +90,8 @@
                     </thead>
                     <tbody>
                     {% for i in pricelist %}
-                    <tr class='clickable-row' data-href="view_item/{{ a.id }}" >
-                        <td>{{ i.name }}</td>
+                    <tr class='clickable-row' >
+                        <td><a href="{% url 'pricelist_viewpage' i.id %}">{{ i.name }}</a></td>
                         <td>{{ i.description }}</td>
                         <td>{{ i.currency }}</td>
                         <td>{{i.types}}</td>
@@ -117,13 +117,13 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     jQuery(document).ready(function($) {
         $(".clickable-row").click(function() {
             window.location = $(this).data("href");
         });
     });
-</script>
+</script> -->
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");

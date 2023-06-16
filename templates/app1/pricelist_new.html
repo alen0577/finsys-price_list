@@ -47,11 +47,11 @@
                             <div class="col-md-6 mt-3">
                                 <label for="validationCustom04">Item Rate</label><br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-1" value="percentage" checked>
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-1" value="Markup/Markdown by a percentage" checked>
                                     <label class="form-check-label" for="inlineRadio1">Markup or Markdown the item rates by a percentage</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-2" value="individual_rate" >
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-2" value="Customized individual rate" >
                                     <label class="form-check-label" for="inlineRadio2">Enter the rate individually for each item</label>
                                 </div>
                                 
@@ -148,7 +148,7 @@
                                                 <tr>
                                                     <td><input type="text" name="itemname[]" value="{{i.name}}"  readonly hidden>{{i.name}}</td>
                                                     <td><input type="number" name="itemrate[]" value="{{i.sales_cost}}" readonly hidden>{{i.sales_cost}}</td>
-                                                    <td><input type="number" name="customrate[]"></td>
+                                                    <td><input type="number" name="customrate[]" value="0"></td>
 
                                                 </tr>
                                             </tbody>

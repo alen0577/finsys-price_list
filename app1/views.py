@@ -37513,12 +37513,14 @@ def pricelist_editpage(request):
         return redirect('pricelist')       
 
 @login_required(login_url='regcomp')
-def pricelist_viewpage(request):
+def pricelist_viewpage(request,pk):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
         pricelist=Pricelist.objects.filter(cid=cmp1)
+        pl=Pricelist.objects.get(id=pk,cid=cmp1)
+       
         
-        context = {'cmp1': cmp1, 'pricelist':pricelist}
+        context = {'cmp1': cmp1, 'pricelist':pricelist, 'pl':pl,}
         return render(request,'app1/pricelist_viewpage.html',context) 
             
     except:
@@ -37536,27 +37538,28 @@ def create_pricelist(request):
         upordown=request.POST['select']
         percentage=request.POST['cent']
         roundoffto=request.POST['select2']
-        pricelist=Pricelist(cid=cmp1,name=name,types=typedata,item_rate=itemratedata,description=description,)
+        pricelist=Pricelist(cid=cmp1,name=name,types=typedata,item_rate=itemratedata,description=description,upordown=upordown,percentage=percentage,roundoffto=roundoffto,)
         pricelist.save()
         itemname=request.POST.getlist('itemname[]')
         itemrate=request.POST.getlist('itemrate[]')
         customrate=request.POST.getlist('customrate[]')
         print(customrate)
 
-        if itemratedata == 'percentage':
-            pricelistsub1=pricelist1_percentage(upordown=upordown,percentage=percentage,roundoffto=roundoffto,pricelist1=pricelist)
-            pricelistsub1.save()
-            return redirect('pricelist')
-        else:
+        if itemratedata == 'Customized individual rate':
+            
             if len(itemname) == len(itemrate) == len(customrate):
                 mapped2 = zip(itemname,itemrate, customrate)
                 mapped = list(mapped2)
                 print(mapped)
                 for ele in mapped:
-                    created = pricelist2_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist2=pricelist)
+                    created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pricelist)
 
                 print('finish') 
-                return redirect('pricelist')    
+                return redirect('pricelist') 
+
+        else:
+            return redirect('pricelist')
+
 
 
 
