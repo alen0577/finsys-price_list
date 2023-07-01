@@ -859,6 +859,10 @@ urlpatterns = [
     path('pricelist_viewpage/<int:pk>',views.pricelist_viewpage,name='pricelist_viewpage'),
     path('create_pricelist/',views.create_pricelist,name='create_pricelist'),
     path('delete_pricelist/<int:pk>',views.delete_pricelist,name='delete_pricelist'),
+    path('active_pricelist/<int:pk>',views.active_pricelist,name='active_pricelist'),
+    path('inactive_pricelist/<int:pk>',views.inactive_pricelist,name='inactive_pricelist'),
+    path('plactive/',views.plactive,name='plactive'),
+    path('plinactive/',views.plinactive,name='plinactive'),
 
         
     

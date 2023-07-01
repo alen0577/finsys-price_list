@@ -37567,14 +37567,44 @@ def create_pricelist(request):
 
 @login_required(login_url='regcomp')
 def delete_pricelist(request,pk):
-    p1=pricelist1_percentage.objects.filter(pricelist1=pk)
-    p1.delete()
-    p2=pricelist2_individual.objects.filter(pricelist2=pk)
-    p2.delete()
+    
     pricelist=Pricelist.objects.get(id=pk)
     pricelist.delete()
     return redirect('pricelist')
     
+@login_required(login_url='regcomp')
+def active_pricelist(request,pk):
+    pricelist=Pricelist.objects.get(id=pk)
+    pricelist.is_active=True
+    pricelist.save()
+    return redirect('pricelist')
 
+@login_required(login_url='regcomp')
+def inactive_pricelist(request,pk):
+    pricelist=Pricelist.objects.get(id=pk)
+    pricelist.is_active=False
+    pricelist.save()
+    return redirect('pricelist')
 
+@login_required(login_url='regcomp')
+def plactive(request):
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        pricelist=Pricelist.objects.filter(cid=cmp1,is_active=True)
+        context = {'cmp1': cmp1, 'pricelist':pricelist}
+        return render(request,'app1/plactive.html',context)
+            
+    except:
+        return redirect('pricelist')
+
+@login_required(login_url='regcomp')
+def plinactive(request):
+    try:
+        cmp1 = company.objects.get(id=request.session['uid'])
+        pricelist=Pricelist.objects.filter(cid=cmp1,is_active=False)
+        context = {'cmp1': cmp1, 'pricelist':pricelist}
+        return render(request,'app1/plinactive.html',context)
+            
+    except:
+        return redirect('pricelist')        
 

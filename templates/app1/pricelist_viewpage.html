@@ -44,7 +44,7 @@
                                             <tbody>
                                             {% for i in pricelist %}
                                             <tr class='clickable-row' >
-                                                <td>{{ i.name }}</td>
+                                                <td><a href="{% url 'pricelist_viewpage' i.id %}">{{ i.name }}</a></td>
                                                 <td>{{ i.types }}</td>
                                                 {% if i.is_active %}
                                                 <td>Active</td>
@@ -100,13 +100,13 @@
 
                                 <div class="col-lg-7">
 
-                                    <a href="" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
-                                    {% if customer.status == act%}
-                                    <a href="" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactive</a>
+                                    <a href="{% url 'pricelist_editpage' %}" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
+                                    {% if pl.is_active %}
+                                    <a href="{% url 'inactive_pricelist' pl.id %}" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactive</a>
                                     {% else %}
-                                    <a href="" class=" fa fa-check btn btn-outline-info text-grey mt-2 mb-3" role="button"> Active</a>
+                                    <a href="{% url 'active_pricelist' pl.id %}" class=" fa fa-check btn btn-outline-info text-grey mt-2 mb-3" role="button"> Active</a>
                                     {% endif %}
-                                    <a href="" class="fa fa-trash-o btn btn-outline-info text-grey mt-2 mb-3" role="button"> Delete</a>
+                                    <a href="{% url 'delete_pricelist' pl.id %}" class="fa fa-trash-o btn btn-outline-info text-grey mt-2 mb-3" role="button"> Delete</a>
                                     <a href="{% url 'pricelist' %}" class="fa fa-arrow-left btn btn-outline-info text-grey mt-2 mb-3" role="button"> Close</a>
                                    
                                    
