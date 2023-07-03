@@ -100,7 +100,7 @@
 
                                 <div class="col-lg-7">
 
-                                    <a href="{% url 'pricelist_editpage' %}" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
+                                    <a href="{% url 'pricelist_editpage' pl.id %}" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
                                     {% if pl.is_active %}
                                     <a href="{% url 'inactive_pricelist' pl.id %}" class=" fa fa fa-times btn btn-outline-info text-grey mt-2 mb-3" role="button"> Inactive</a>
                                     {% else %}
@@ -141,6 +141,34 @@
                                 </div>
                             </div>
                             
+                            
+                            {% if items %}
+                            <div class="row mb-3">
+                                <label class="col-sm-5">Customized item rates</label><br>
+                                <div class="table-responsive col-sm-10">
+                                    <table class="table  table-striped" style="background-color: #2f516f;color: white;">
+                                        <thead>
+                                            <tr>
+                                                <th>ITEM DETAILS</th>
+                                                <th>STANDARD RATE(INR)</th>
+                                                <th>CUSTOM RATE(INR)</th>
+                                            </tr>
+                                        </thead>
+                                        {% for i in items %}
+                                        <tbody>
+                                            <tr>
+                                                <td>{{i.itemname}}</td>
+                                                <td>{{i.itemrate}}</td>
+                                                <td>{{i.customrate}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+
+                                </div>
+                            </div>
+                            {% else %}
                             <div class="row mb-3">
                                 <label class="col-sm-2">Percentage:</label>
                                 <div class="col-sm-5">
@@ -161,29 +189,7 @@
                                   <p>{{pl.currency}}</p>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5">Customized item rates</label><br>
-                                <div class="table-responsive col-sm-10">
-                                    <table class="table  table-striped" style="background-color: #2f516f;color: white;">
-                                        <thead>
-                                            <tr>
-                                                <th>ITEM DETAILS</th>
-                                                <th>STANDARD RATE(INR)</th>
-                                                <th>CUSTOM RATE(INR)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
+                            {% endif %}
                             
 
                             

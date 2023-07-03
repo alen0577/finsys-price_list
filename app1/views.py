@@ -37474,7 +37474,7 @@ def crd_create_item(request):
 def create_new(request):
     return render(request,'app1/chart_new.html')
 
-
+# ---------------------------------------------------------pricelist <Alen Antony>---------------------
 
 @login_required(login_url='regcomp')
 def pricelist(request):
@@ -37502,11 +37502,15 @@ def new_price_list(request):
 
 
 @login_required(login_url='regcomp')
-def pricelist_editpage(request):
+def pricelist_editpage(request,pk):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
+        pl=Pricelist.objects.get(id=pk,cid=cmp1,)
+        items=pricelist_individual.objects.filter(pricelist1=pk)
+        item = itemtable.objects.all()
         
-        context = {'cmp1': cmp1}
+        
+        context = {'cmp1': cmp1,'pl':pl,'items':items,'item':item}
         return render(request,'app1/pricelist_editpage.html',context) 
             
     except:
@@ -37518,9 +37522,10 @@ def pricelist_viewpage(request,pk):
         cmp1 = company.objects.get(id=request.session['uid'])
         pricelist=Pricelist.objects.filter(cid=cmp1)
         pl=Pricelist.objects.get(id=pk,cid=cmp1)
+        items=pricelist_individual.objects.filter(pricelist1=pk)
        
         
-        context = {'cmp1': cmp1, 'pricelist':pricelist, 'pl':pl,}
+        context = {'cmp1': cmp1, 'pricelist':pricelist, 'pl':pl,'items':items,}
         return render(request,'app1/pricelist_viewpage.html',context) 
             
     except:
@@ -37608,3 +37613,43 @@ def plinactive(request):
     except:
         return redirect('pricelist')        
 
+@login_required(login_url='regcomp')
+def editpl(request,pk):
+    if request.method == 'POST':
+        cmp1 = company.objects.get(id=request.session['uid'])
+        pl=Pricelist.objects.get(cid=cmp1,id=pk)
+        pl.name=request.POST['name']
+        pl.types=request.POST['type']
+        pl.item_rate=request.POST['item-rate']
+        itemratedata=request.POST['item-rate']
+        pl.description=request.POST['description']
+        pl.upordown=request.POST['select']
+        pl.percentage=request.POST['cent']
+        pl.roundoffto=request.POST['select2']
+        
+        itemname=request.POST.getlist('itemname[]')
+        itemrate=request.POST.getlist('itemrate[]')
+        customrate=request.POST.getlist('customrate[]')
+        items=pricelist_individual.objects.filter(pricelist1=pk)
+        if items :
+            items.delete()
+            if len(itemname) == len(itemrate) == len(customrate):
+                mapped2 = zip(itemname,itemrate, customrate)
+                mapped = list(mapped2)
+                
+                for ele in mapped:
+                    created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pl)
+
+               
+        else:
+            if itemratedata == 'Customized individual rate':
+            
+                if len(itemname) == len(itemrate) == len(customrate):
+                    mapped2 = zip(itemname,itemrate, customrate)
+                    mapped = list(mapped2)
+                    
+                    for ele in mapped:
+                        created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pl)            
+
+        pl.save()
+        return redirect('pricelist')

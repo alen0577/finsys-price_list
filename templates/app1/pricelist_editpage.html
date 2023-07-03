@@ -5,7 +5,7 @@
         <div class="card radius-15">
             <div class="card-body">
                 <div class="card-title">
-                    <center><h3 class="mb-0">EDIT PRICE LIST </h3></center>
+                    <center><h3 class="mb-0">EDIT PRICE LIST</h3></center>
                 </div>
             
             </div>
@@ -16,14 +16,14 @@
                     <h4 class="mb-0">Edit Price List</h4>
                 </div>
                 <hr/>
-                <form action="" method="post" class="needs-validation" novalidate>
+                <form action="{% url 'editpl' pl.id %}" method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
                     {% if user.is_authenticated %}
                         <div class="row">
                             
                             <div class="col-md-4 mt-3">
                                 <label for="validationCustom02">Name*</label>
-                                <input type="text" class="form-control" id="validationCustom02" name="name" required style="background-color: #2f516f;color: white;">
+                                <input type="text" class="form-control" id="validationCustom02" name="name" required style="background-color: #2f516f;color: white;" value="{{pl.name}}">
                                 
                             </div>
                             
@@ -31,14 +31,25 @@
                         <div class="row">
                             <div class="col-md-4 mt-3">
                                 <label for="validationCustom03">Type</label><br>
+                                {% if pl.types == "Sales" %}
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="option1" checked readonly>
+                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="Sales" checked>
                                     <label class="form-check-label" for="inlineRadio1">Sales</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="option2" readonly>
+                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="Purchase" disabled>
                                     <label class="form-check-label" for="inlineRadio2">Purchase</label>
                                 </div>
+                                {% else %}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="Sales" disabled>
+                                    <label class="form-check-label" for="inlineRadio1">Sales</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="Purchase" checked>
+                                    <label class="form-check-label" for="inlineRadio2">Purchase</label>
+                                </div>
+                                {% endif %}
                                 
                             </div>
                             
@@ -46,14 +57,25 @@
                         <div class="row">
                             <div class="col-md-6 mt-3">
                                 <label for="validationCustom04">Item Rate</label><br>
+                                {% if pl.item_rate == "Markup/Markdown by a percentage" %}
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-1" checked>
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-1" value="Markup/Markdown by a percentage" checked>
                                     <label class="form-check-label" for="inlineRadio1">Markup or Markdown the item rates by a percentage</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-2" required>
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-2" value="Customized individual rate">
                                     <label class="form-check-label" for="inlineRadio2">Enter the rate individually for each item</label>
                                 </div>
+                                {% else %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-1" value="Markup/Markdown by a percentage">
+                                    <label class="form-check-label" for="inlineRadio1">Markup or Markdown the item rates by a percentage</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="item-rate" id="item-rate-2" value="Customized individual rate" checked>
+                                    <label class="form-check-label" for="inlineRadio2">Enter the rate individually for each item</label>
+                                </div>
+                                {% endif %}
                                 
                                 
                             </div>
@@ -65,7 +87,7 @@
                             
                             <div class="col-md-4 mt-3">
                                 <label for="validationCustom03">Description</label>
-                                <textarea class="form-control" id="validationTextarea" placeholder="Enter the description"  style="background-color: #2f516f;color: white;"></textarea>
+                                <textarea class="form-control" id="validationTextarea" name="description" placeholder="Enter the description"  style="background-color: #2f516f;color: white;" required>{{pl.description}}</textarea>
                             </div>
                             
                         </div><br>
@@ -76,13 +98,14 @@
                                 <div class="col-md-4 mt-3">
                                     <label>Percentage*</label>
                                     <div class="input-group mb-3">
-                                        <select class="form-select" aria-label="Default select example" style="background-color: #2f516f;color: white;" required>
+                                        <select class="form-select" aria-label="Default select example" name="select" style="background-color: #2f516f;color: white;" required>
                                             
-                                            <option value="1" style="background-color: #2f516f;color: white;">Markup</option>
-                                            <option value="2" style="background-color: #2f516f;color: white;">Markdown</option>
+                                            <option value="{{pl.upordown}}" style="background-color: #2f516f;color: white;" hidden>{{pl.upordown}}</option>
+                                            <option value="Markup" style="background-color: #2f516f;color: white;">Markup</option>
+                                            <option value="Markdown" style="background-color: #2f516f;color: white;">Markdown</option>
                                            
                                         </select>
-                                        <input type="number" class="form-control" aria-label="Text input with dropdown button" style="background-color: #2f516f;color: white;" required>
+                                        <input type="number" class="form-control" name="cent" aria-label="Text input with dropdown button" style="background-color: #2f516f;color: white;" value="{{pl.percentage}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -90,13 +113,14 @@
                             <div class="row">
                                 <div class="col-md-4 mt-3">
                                     <label>Round Off To*</label><br>
-                                    <select class="form-select form-control" aria-label="Default select example" style="background-color: #2f516f;color: white;" required>
-                                            
-                                        <option value="1" style="background-color: #2f516f;color: white;">Never mind</option>
-                                        <option value="2" style="background-color: #2f516f;color: white;">Nearest whole number</option>
-                                        <option value="3" style="background-color: #2f516f;color: white;">.99</option>
-                                        <option value="4" style="background-color: #2f516f;color: white;">.50</option>
-                                        <option value="5" style="background-color: #2f516f;color: white;">.49</option>
+                                    <select class="form-select form-control" name="select2" aria-label="Default select example" style="background-color: #2f516f;color: white;" required>
+                                        
+                                        <option value="{{pl.roundoffto}}" style="background-color: #2f516f;color: white;" hidden>{{pl.roundoffto}}</option>
+                                        <option value="Never mind" style="background-color: #2f516f;color: white;">Never mind</option>
+                                        <option value="Nearest whole number" style="background-color: #2f516f;color: white;">Nearest whole number</option>
+                                        <option value=".99" style="background-color: #2f516f;color: white;">.99</option>
+                                        <option value=".50" style="background-color: #2f516f;color: white;">.50</option>
+                                        <option value=".49" style="background-color: #2f516f;color: white;">.49</option>
                                        
                                     </select>
                                 </div>
@@ -112,7 +136,7 @@
                             <div class="col-md-4 mt-3">
                                 <label>Currency</label>
                                 <select class="form-select form-control" aria-label="Default select example" style="background-color: #2f516f;color: white;" required>
-                                    <option value="INR" style="background-color: #2f516f;color: white;">Indian Rupee</option>
+                                    <option value="INR" style="background-color: #2f516f;color: white;">{{pl.currency}}</option>
                                   
                                 </select>
 
@@ -143,14 +167,29 @@
                                                     <th>CUSTOM RATE(INR)</th>
                                                 </tr>
                                             </thead>
+                                            {% if items %}
+                                            {% for i in items %}
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><input type="text" name="itemname[]" value="{{i.itemname}}"  readonly hidden>{{i.itemname}}</td>
+                                                    <td><input type="number" name="itemrate[]" value="{{i.itemrate}}" readonly hidden>{{i.itemrate}}</td>
+                                                    <td><input type="number" name="customrate[]" value="{{i.customrate}}"></td>
 
                                                 </tr>
                                             </tbody>
+                                            {% endfor %}
+                                            {% else %}
+                                            {% for i in item %}
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="itemname[]" value="{{i.name}}"  readonly hidden>{{i.name}}</td>
+                                                    <td><input type="number" name="itemrate[]" value="{{i.sales_cost}}" readonly hidden>{{i.sales_cost}}</td>
+                                                    <td><input type="number" name="customrate[]" value="0"></td>
+
+                                                </tr>
+                                            </tbody>
+                                            {% endfor %}
+                                            {% endif %}
                                         </table>
 
                                     </div>
@@ -235,6 +274,42 @@
                 });
             }, false);
         })();
+    </script>
+
+    <script>
+        function showtable(){
+           
+            var radio2 = document.getElementById('item-rate-2');
+            var fields1 = document.getElementById('fields-1');
+            var fields2 = document.getElementById('fields-2');
+            var fields3 = document.getElementById('fields-3');
+
+            if (radio2.checked) {
+                fields1.style.display = 'none';
+                fields2.style.display = 'block';
+                fields3.style.display = 'block';
+
+            }
+
+        }
+
+        function hidetable(){
+            var radio1 = document.getElementById('item-rate-1');
+            var fields1 = document.getElementById('fields-1');
+            var fields2 = document.getElementById('fields-2');
+            var fields3 = document.getElementById('fields-3');
+
+            if (radio1.checked){
+                fields1.style.display = 'block';
+                fields2.style.display = 'none';
+                fields3.style.display = 'none';
+
+            }
+
+        }
+
+        showtable();
+        hidetable();
     </script>
 
 {% endblock %}

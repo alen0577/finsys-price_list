@@ -26,10 +26,10 @@
                         <div class="input-group-prepend search-arrow-back">
                             <button class="btn btn-search-back" type="button"><i class="bx bx-arrow-back"></i></button>
                         </div>
-                        <input type="text" autocomplete="off" id="searchInput" onkeyup="filter(this);" onclick="myFunction1()" class="form-control" placeholder="search" />
+                        <!-- <input type="text" autocomplete="off" id="searchInput" onkeyup="filter(this);" onclick="myFunction1()" class="form-control" placeholder="search" />
                         <div class="input-group-append">
                             <button class="btn btn-search" type="button"><i class="lni lni-search-alt"></i></button>
-                        </div>
+                        </div> -->
                         <div class=" mt-5" id="myDIV" style="z-index:1;position:absolute; 
                               background-color: #213b52;width:400px;height:1px;">
                               
@@ -81,7 +81,7 @@
                     <tr>
                         <th>NAME</th>
                         <th>DESCRIPTION</th>
-                        <th>CURRENCY</th>
+                        
                         <th>TYPE</th>
                         <th>ITEM RATE</th>
                         <th>STATUS</th>
@@ -93,7 +93,7 @@
                     <tr class='clickable-row' >
                         <td><a href="{% url 'pricelist_viewpage' i.id %}">{{ i.name }}</a></td>
                         <td>{{ i.description }}</td>
-                        <td>{{ i.currency }}</td>
+                        
                         <td>{{i.types}}</td>
                         <td>{{i.item_rate}}</td>
                         {% if i.is_active %}
