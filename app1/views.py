@@ -37492,7 +37492,7 @@ def pricelist(request):
 def new_price_list(request):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
-        items = itemtable.objects.filter(cid=cmpl)
+        items = itemtable.objects.filter(cid=cmp1)
         
         context = {'cmp1': cmp1,'items':items}
         return render(request,'app1/pricelist_new.html',context) 
@@ -37507,7 +37507,7 @@ def pricelist_editpage(request,pk):
         cmp1 = company.objects.get(id=request.session['uid'])
         pl=Pricelist.objects.get(id=pk,cid=cmp1,)
         items=pricelist_individual.objects.filter(pricelist1=pk)
-        item = itemtable.objects.all()
+        item = itemtable.objects.filter(cid=cmp1)
         
         
         context = {'cmp1': cmp1,'pl':pl,'items':items,'item':item}
