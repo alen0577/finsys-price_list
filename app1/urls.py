@@ -851,7 +851,7 @@ urlpatterns = [
         path('Set-Password',views.change_to_new_password,name='change_to_new_password'),
 
 
-    #Price list
+    # urls for Price list
     
     path('price_list/',views.pricelist,name='pricelist'),
     path('new_price_list/',views.new_price_list,name='new_price_list'),

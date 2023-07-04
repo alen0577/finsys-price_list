@@ -37474,7 +37474,7 @@ def crd_create_item(request):
 def create_new(request):
     return render(request,'app1/chart_new.html')
 
-# ---------------------------------------------------------pricelist <Alen Antony>---------------------
+# ---------------------------------------------------------views for pricelist  <Alen Antony>---------------------
 
 @login_required(login_url='regcomp')
 def pricelist(request):
@@ -37492,7 +37492,7 @@ def pricelist(request):
 def new_price_list(request):
     try:
         cmp1 = company.objects.get(id=request.session['uid'])
-        items = itemtable.objects.all()
+        items = itemtable.objects.filter(cid=cmpl)
         
         context = {'cmp1': cmp1,'items':items}
         return render(request,'app1/pricelist_new.html',context) 
@@ -37582,14 +37582,14 @@ def active_pricelist(request,pk):
     pricelist=Pricelist.objects.get(id=pk)
     pricelist.is_active=True
     pricelist.save()
-    return redirect('pricelist')
+    return redirect('pricelist_viewpage',pk=pricelist.id)
 
 @login_required(login_url='regcomp')
 def inactive_pricelist(request,pk):
     pricelist=Pricelist.objects.get(id=pk)
     pricelist.is_active=False
     pricelist.save()
-    return redirect('pricelist')
+    return redirect('pricelist_viewpage',pk=pricelist.id)
 
 @login_required(login_url='regcomp')
 def plactive(request):
@@ -37632,13 +37632,16 @@ def editpl(request,pk):
         customrate=request.POST.getlist('customrate[]')
         items=pricelist_individual.objects.filter(pricelist1=pk)
         if items :
-            items.delete()
-            if len(itemname) == len(itemrate) == len(customrate):
-                mapped2 = zip(itemname,itemrate, customrate)
-                mapped = list(mapped2)
-                
-                for ele in mapped:
-                    created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pl)
+            if itemratedata == 'Markup/Markdown by a percentage':
+                items.delete()
+            else:
+                items.delete()    
+                if len(itemname) == len(itemrate) == len(customrate):
+                    mapped2 = zip(itemname,itemrate, customrate)
+                    mapped = list(mapped2)
+                    
+                    for ele in mapped:
+                        created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pl)
 
                
         else:
@@ -37650,6 +37653,6 @@ def editpl(request,pk):
                     
                     for ele in mapped:
                         created = pricelist_individual.objects.get_or_create(itemname=ele[0], itemrate=ele[1], customrate=ele[2], pricelist1=pl)            
-
+            
         pl.save()
-        return redirect('pricelist')
+        return redirect('pricelist_viewpage',pk=pl.id)
