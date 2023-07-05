@@ -4,7 +4,7 @@
     <div class="page-content">
 
         <div class="row">
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="card radius-15" style="background-color: #243e54;">
                     <div class="card-body">
                         <form action="" method="post" class="needs-validation" novalidate>
@@ -33,10 +33,9 @@
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <!-- <th>DESCRIPTION</th> -->
-                                                <!-- <th>CURRENCY</th> -->
+                                               
                                                 <th>Type</th>
-                                                <!-- <th>ROUNDING</th> -->
+                                               
                                                 <th>Status</th>
                                                 
                                             </tr>
@@ -78,10 +77,10 @@
                 </div>
         
 
-            </div>
+            </div> -->
 
            
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 
                 <div class="card radius-15" style="background-color: #243e54;">
                     <div class="card-body">
@@ -91,14 +90,14 @@
                            
                             
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-8">
                                     <div class="card-title mt-2">
-                                        <h6 class="mb-0">{{pl.name}}</h6>
+                                        <h4 class="mb-0 text-center ">{{pl.name}}</h4>
                                     </div>
                                 </div>
-                                <div class="col-lg-1"></div>
+                               
 
-                                <div class="col-lg-7">
+                                <div class="col-lg-4">
 
                                     <a href="{% url 'pricelist_editpage' pl.id %}" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
                                     {% if pl.is_active %}
@@ -117,25 +116,25 @@
                             <hr>
                               
                             <div class="row mb-3">
-                                <label class="col-sm-2">Name:</label>
+                                <label class="col-sm-2">Name :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.name}}</p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Type:</label>
+                                <label class="col-sm-2">Type :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.types}}</p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Item Rate:</label>
+                                <label class="col-sm-2">Item Rate :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.item_rate}}</p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Description:</label>
+                                <label class="col-sm-2">Description :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.description}}</p>
                                 </div>
@@ -144,8 +143,9 @@
                             
                             {% if items %}
                             <div class="row mb-3">
-                                <label class="col-sm-5">Customized item rates</label><br>
-                                <div class="table-responsive col-sm-10">
+                                <label class="col-sm-12 mb-3 " style="font-size: large;">Customized item rates</label>
+                                <div class="col-sm-2"></div>
+                                <div class="table-responsive col-sm-8">
                                     <table class="table  table-striped" style="background-color: #2f516f;color: white;">
                                         <thead>
                                             <tr>
@@ -167,24 +167,25 @@
                                     </table>
 
                                 </div>
+                                <div class="col-sm-2"></div>
                             </div>
                             {% else %}
                             <div class="row mb-3">
-                                <label class="col-sm-2">Percentage:</label>
+                                <label class="col-sm-2">Percentage :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.upordown}} - {{pl.percentage}}%</p>
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
-                                <label class="col-sm-2">Round off to:</label>
+                                <label class="col-sm-2">Round off to :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.roundoffto}}</p>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
-                                <label class="col-sm-2">Currency:</label>
+                                <label class="col-sm-2">Currency :</label>
                                 <div class="col-sm-5">
                                   <p>{{pl.currency}}</p>
                                 </div>

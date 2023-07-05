@@ -1692,9 +1692,9 @@ class Pricelist(models.Model):
 
     description=models.TextField(blank=True, null=True)
     currency=models.CharField(max_length=255,default='Indian Rupee')
-    upordown=models.CharField(max_length=100,default='Markup')
+    upordown=models.CharField(max_length=100,default='None')
     percentage=models.CharField(max_length=100,null=True,blank=True)
-    roundoffto=models.CharField(max_length=100,default='Never mind')
+    roundoffto=models.CharField(max_length=100,default='None')
     is_active=models.BooleanField(default=True,null=True,blank=True)
     
 
