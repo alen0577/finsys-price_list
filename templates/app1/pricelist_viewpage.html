@@ -4,83 +4,9 @@
     <div class="page-content">
 
         <div class="row">
-            <!-- <div class="col-lg-4">
-                <div class="card radius-15" style="background-color: #243e54;">
-                    <div class="card-body">
-                        <form action="" method="post" class="needs-validation" novalidate>
-                            {% csrf_token %}
-                            
 
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="card-title mt-2">
-                                        <h6 class="mb-0">All price lists</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-5">
-                                    <a href="{% url 'new_price_list' %}">     
-                                        <button type="button" class="btn btn-outline-info btn-sm text-grey">+ Price List</button>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-responsive-md table-hover mt-4" id="tabletobe">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                               
-                                                <th>Type</th>
-                                               
-                                                <th>Status</th>
-                                                
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for i in pricelist %}
-                                            <tr class='clickable-row' >
-                                                <td><a href="{% url 'pricelist_viewpage' i.id %}">{{ i.name }}</a></td>
-                                                <td>{{ i.types }}</td>
-                                                {% if i.is_active %}
-                                                <td>Active</td>
-                                                {% else %}
-                                                <td>Inactive</td>
-                                                {% endif %}
-                                                <td></td>
-                                                <td></td>
-                                                       
-                                                        
-                                            </tr>
-                                             
-                                            {% endfor %}
-                                          
-                                          
-                                           
-                                          
-                                            </tbody>
-                                        </table>
-                                    </div>
-                               
-                                </div>
-                                
-                                
-                            </div>
-                                         
-                                
-                           
-                        </form>
-                    </div>
-                </div>
-        
-
-            </div> -->
-
-           
-            <div class="col-lg-12">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
                 
                 <div class="card radius-15" style="background-color: #243e54;">
                     <div class="card-body">
@@ -90,14 +16,14 @@
                            
                             
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="col-lg-7">
                                     <div class="card-title mt-2">
-                                        <h4 class="mb-0 text-center ">{{pl.name}}</h4>
+                                        <h3 class="mb-0 text-center" style="font-family: monospace;">{{pl.name}}</h3>
                                     </div>
                                 </div>
                                
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-5">
 
                                     <a href="{% url 'pricelist_editpage' pl.id %}" class=" fa fa-pencil btn btn-outline-info text-grey mt-2 mb-3" role="button"> Edit</a>
                                     {% if pl.is_active %}
@@ -116,42 +42,47 @@
                             <hr>
                               
                             <div class="row mb-3">
-                                <label class="col-sm-2">Name :</label>
+                                <label class="col-sm-2" style="font-size: large;">Name</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.name}}</p>
+                                  <p style="font-size: large;"><b>{{pl.name}}</b></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Type :</label>
+                                <label class="col-sm-2" style="font-size: large;">Type</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.types}}</p>
+                                  <p style="font-size: large;"><b>{{pl.types}}</b></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Item Rate :</label>
+                                <label class="col-sm-2" style="font-size: large;">Item Rate</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.item_rate}}</p>
+                                  <p style="font-size: large;"><b>{{pl.item_rate}}</b></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2">Description :</label>
+                                <label class="col-sm-2" style="font-size: large;">Description</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.description}}</p>
+                                  <p style="font-size: large;"><b>{{pl.description}}</b></p>
                                 </div>
                             </div>
                             
                             
                             {% if items %}
+                            <hr>
                             <div class="row mb-3">
-                                <label class="col-sm-12 mb-3 " style="font-size: large;">Customized item rates</label>
+                                <label class="col-sm-12 mb-5 text-center" style="font-size: large;"><b>Customized item rates</b></label>
                                 <div class="col-sm-2"></div>
                                 <div class="table-responsive col-sm-8">
-                                    <table class="table  table-striped" style="background-color: #2f516f;color: white;">
+                                    <table class="table  table-striped" style="background-color: #2f516f;color: white;font-size: large;">
                                         <thead>
                                             <tr>
-                                                <th>ITEM DETAILS</th>
-                                                <th>STANDARD RATE(INR)</th>
-                                                <th>CUSTOM RATE(INR)</th>
+                                                <th>Item Details</th>
+                                                <th>Standard Rate(INR)</th>
+                                                <th>Custom Rate(INR)</th>
                                             </tr>
                                         </thead>
                                         {% for i in items %}
@@ -159,7 +90,7 @@
                                             <tr>
                                                 <td>{{i.itemname}}</td>
                                                 <td>{{i.itemrate}}</td>
-                                                <td>{{i.customrate}}</td>
+                                                <td><b>{{i.customrate}}</b></td>
 
                                             </tr>
                                         </tbody>
@@ -171,23 +102,26 @@
                             </div>
                             {% else %}
                             <div class="row mb-3">
-                                <label class="col-sm-2">Percentage :</label>
+                                <label class="col-sm-2" style="font-size: large;">Percentage</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.upordown}} - {{pl.percentage}}%</p>
+                                  <p style="font-size: large;"><b>{{pl.percentage}}%  {{pl.upordown}}</b></p>
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
-                                <label class="col-sm-2">Round off to :</label>
+                                <label class="col-sm-2" style="font-size: large;">Round off to</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.roundoffto}}</p>
+                                  <p style="font-size: large;"><b>{{pl.roundoffto}}</b></p>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
-                                <label class="col-sm-2">Currency :</label>
+                                <label class="col-sm-2" style="font-size: large;">Currency</label>
+                                <p ><b>:</b></p>
                                 <div class="col-sm-5">
-                                  <p>{{pl.currency}}</p>
+                                  <p style="font-size: large;"><b>{{pl.currency}}</b></p>
                                 </div>
                             </div>
                             {% endif %}
@@ -212,6 +146,8 @@
                 
                 
             </div>
+            <div class="col-lg-1"></div>
+
            
         </div>
        

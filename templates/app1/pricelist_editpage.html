@@ -105,7 +105,8 @@
                                             <option value="Markdown" style="background-color: #2f516f;color: white;">Markdown</option>
                                            
                                         </select>
-                                        <input type="number" class="form-control" name="cent" aria-label="Text input with dropdown button" style="background-color: #2f516f;color: white;" value="{{pl.percentage}}" required>
+                                        <input type="number" class="form-control" name="cent" aria-label="Text input with dropdown button" style="background-color: #2f516f;color: white;" value="{{pl.percentage}}" dir="rtl" required>
+                                        <input type="button" class="btn" aria-label="Text input with dropdown button" style="background-color: #2f516f;color: white;" value=" % ">
                                     </div>
                                 </div>
                             </div>
@@ -311,5 +312,13 @@
         showtable();
         hidetable();
     </script>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        
+    </style>
 
 {% endblock %}

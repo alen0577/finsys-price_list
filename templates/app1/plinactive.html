@@ -36,7 +36,7 @@
                                  <ul id="searchList" class="one radius-15" style="background-color: #213b52;">
                                     {% for a in items %}
                                     <a href="view_item/{{ a.id }}"><li>{{ a.name }}</li></a>
-                                  {% endfor %}
+                                    {% endfor %}
                              
                                  </ul>
                                  </div>
@@ -81,10 +81,11 @@
                     <tr>
                         <th>NAME</th>
                         <th>DESCRIPTION</th>
-                        
                         <th>TYPE</th>
                         <th>ITEM RATE</th>
+                        <th>ROUNDING</th>
                         <th>STATUS</th>
+                        <th>DETAILS</th>
                         
                     </tr>
                     </thead>
@@ -93,13 +94,29 @@
                     <tr class='clickable-row' >
                         <td><a href="{% url 'pricelist_viewpage' i.id %}">{{ i.name }}</a></td>
                         <td>{{ i.description }}</td>
-                        
+                       
                         <td>{{i.types}}</td>
                         <td>{{i.item_rate}}</td>
+
+                        {% if i.item_rate == "Customized individual rate" %}
+                        <td>- - - - -</td>
+                        {% else %}
+                        <td>{{i.roundoffto}}</td>
+                        {% endif %}
+                        
+                       
+
+
                         {% if i.is_active %}
                         <td>Active</td>
                         {% else %}
                         <td>Inactive</td>
+                        {% endif %}
+                        
+                        {% if i.item_rate == "Customized individual rate" %}
+                        <td>Per Item Rate</td>
+                        {% else %}
+                        <td>{{i.percentage}}%   {{i.upordown}}</td>
                         {% endif %}
                                
                                 

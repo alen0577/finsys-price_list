@@ -98,8 +98,11 @@
                         <td>{{i.types}}</td>
                         <td>{{i.item_rate}}</td>
 
-                        
+                        {% if i.item_rate == "Customized individual rate" %}
+                        <td>- - - - -</td>
+                        {% else %}
                         <td>{{i.roundoffto}}</td>
+                        {% endif %}
                         
                        
 
@@ -109,8 +112,12 @@
                         {% else %}
                         <td>Inactive</td>
                         {% endif %}
-
-                        <td>{{i.upordown}} - {{i.percentage}}%</td>
+                        
+                        {% if i.item_rate == "Customized individual rate" %}
+                        <td>Per Item Rate</td>
+                        {% else %}
+                        <td>{{i.percentage}}%   {{i.upordown}}</td>
+                        {% endif %}
                                
                                 
                     </tr>
